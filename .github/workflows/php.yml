@@ -23,7 +23,7 @@ jobs:
     - name: Run phpcs-drupal with reviewdog
       uses: acrollet/action-phpcs-drupal@v1.0.2
       with:
-        workdir: web/modules/custom
+        # workdir: web/modules/custom
         # phpcs_args:
         # phpcs_ignore: # optional, default is node_modules,bower_components,vendor
         # Coding standard for PHPCS to use when checking files
