@@ -20,6 +20,18 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
+    - name: Run phpcs-drupal with reviewdog
+      uses: acrollet/action-phpcs-drupal@v1.0.2
+      with:
+        workdir: web/modules/custom
+        # phpcs_args:
+        # phpcs_ignore: # optional, default is node_modules,bower_components,vendor
+        # Coding standard for PHPCS to use when checking files
+        # phpcs_standard: # optional, default is Drupal
+        
+    - name: Drupal package security scanner
+      uses: lpeabody/drupal-security-action@1.0.0
+    
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -32,6 +44,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
+    - name: DrupalQA
+      uses: hussainweb/drupalqa-action@v2.0.0
+      
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
